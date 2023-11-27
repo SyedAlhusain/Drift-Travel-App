@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <a href="{{ url_for('create_lodging') }}" class="btn btn-primary" role="button">Add a New Lodging</a>
+
+  <div class="container">
+    <h2>Lodgings</h2>
+    <p>Choose a lodging to see what people have to say about it:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lodging Name</th>
+                <th>Location</th>
+                <th>View Visits</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lodging in lodgings.items %}
+            <tr>
+                <td>{{ lodging.lodging_name }}</td>
+                <td>{{ lodging.location }}</td>
+                <td><a href="{{ url_for('view_visits', lodging_id=lodging.lodging_id) }}" class="btn btn-primary" role="button">Search</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+    {% for page_num in lodgings.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if lodgings.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('lodgings', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('lodgings', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

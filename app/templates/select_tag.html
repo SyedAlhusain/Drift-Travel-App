@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <div class="container">
+    <h2>Available Tags</h2>
+    <p>Choose a tag to add it to your post:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tag</th>
+                <th>Description</th>
+                <th>Add to your Post</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tag in tags.items %}
+            <tr>
+                <td>{{ tag.tag_name }}</td>
+                <td>{{ tag.description }}</td>
+                <td><a href="{{ url_for('add_tag', tag_id=tag.tag_id, post_id=post_id) }}" class="btn btn-primary" role="button">Add</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+    {% for page_num in tags.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if tags.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('tags', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('tags', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

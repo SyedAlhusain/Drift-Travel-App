@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  {% for post in posts.items %}
+  <div class="media">
+    <div class="media-left">
+      <img src="{{ url_for('static', filename='post_pics/' + post.image) }}" class="media-object" style="width:500px">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ post.post_title }}</h4>
+      <h3>{{ post.location }}</h3>
+      <p>{{post.post_content }}</p>
+    </div>
+  </div>
+  <hr>
+  <a href="{{ url_for('view_comments', post_id=post.post_id) }}" class="btn btn-primary" role="button">View Comments</a>
+  <a href="{{ url_for('select_tag', post_id=post.post_id) }}" class="btn btn-primary" role="button">Add Tag</a>
+  {% if visits.filter_by(fk_post_id=post.post_id).first() %}
+    <a href="{{ url_for('view_visit', post_id=post.post_id) }}" class="btn btn-primary" role="button">View Lodging Stay</a>
+  {% else %}
+    <a href="{{ url_for('select_lodging', post_id=post.post_id) }}" class="btn btn-primary" role="button">Create Lodging Stay</a>
+  {% endif %}
+  <a href="{{ url_for('update_post', post_id=post.post_id) }}" class="btn btn-primary" role="button">Update Post</a>
+  <p>Likes: {{ likes.filter_by(fk_post_id=post.post_id).count() }}</p>
+  <button id="myBtn">Delete</button>
+    {# Prompts a confirm screen on the delete button press #}
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Are you sure that you want to delete this Post?</p>
+        <a class="button" href="{{ url_for('delete_post', user_id=post.fk_user_id, post_id=post.post_id) }}">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if posts.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('your_posts', user_id=user_id, page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('your_posts', user_id=user_id, page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+
+{% endblock content %}

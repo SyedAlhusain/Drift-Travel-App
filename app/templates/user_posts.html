@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <h1 class="mb-3">Posts by {{ user.user_name }} from {{ user.location }}</h1>
+  {% for post in posts.items %}
+
+  {% endfor %}
+
+  {% for post in posts.items %}
+  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if post.page == page_num %}
+      <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+   ...
+  {% endif %}
+  {% endfor %}
+
+{% endblock content %}

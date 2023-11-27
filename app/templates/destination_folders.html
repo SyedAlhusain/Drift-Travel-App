@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <a href="{{ url_for('create_destination_folder') }}" class="btn btn-primary" role="button">Make a New Destination Folder</a>
+
+  <div class="container">
+    <h2>Your Destination Folders</h2>
+    <p>Choose a folder to view your saved destinations in it, or create a new folder to start adding destinations to it!</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Change Name</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for folder in folders %}
+            <tr>
+                <td>{{ folder.folder_name }}</td>
+                <td><a href="{{ url_for('update_destination_folder', folder_id=folder.folder_id) }}" class="btn btn-primary" role="button">Rename</a></td>
+                <td><a href="{{ url_for('destinations', folder_id=folder.folder_id) }}" class="btn btn-primary" role="button">Open</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+{% endblock content %}

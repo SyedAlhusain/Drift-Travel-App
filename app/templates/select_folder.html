@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> <a href="{{ url_for('create_destination_folder') }}">Create a New Destination Folder</a> </h2>
+
+<table>
+    <tr>
+        <th>Destination Folder Name</th>
+        <th>Add</th>
+    </tr>
+    {# Display each destination_folder object along with the button to add the selected post to each folder #}
+    {% for folder in folders %}
+    <tr>
+        <td>{{ folder.folder_name }}</td>
+        <td>
+            <a class="button" href="{{ url_for('save_destination', folder_id=folder.folder_id, post_id=post_id) }}">Add</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

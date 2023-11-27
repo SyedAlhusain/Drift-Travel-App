@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{# creates a form for creating a destination_folder object that users input the name of #}
+  <form id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Enter the name for your new Destination Folder:</legend>
+      <label for="folder_name">Folder Name: (limit of 16 characters)</label>
+      <input type="text" id="folder_name" name="folder_name" required minlength="1" maxlength="16"><br><br>
+      <input type="submit">
+    </fieldset>
+
+  </form>
+
+
+{% endblock content %}

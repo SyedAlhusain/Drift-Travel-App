@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {% if title %}
+    <title>{{ title }}</title>
+  {% endif %}
+</head>
+<body>
+  {# If there are any flash messages, print them at the top of the page #}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Drift</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('posts') }}">Posts</a></li>
+        <li><a href="{{ url_for('tags') }}">Search</a></li>
+        <li><a href="{{ url_for('lodgings') }}">Lodgings</a></li>
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('your_posts', user_id=current_user.user_id) }}">Your Posts</a></li>
+          <li><a href="{{ url_for('your_comments') }}">Your Comments</a></li>
+          <li><a href="{{ url_for('destination_folders') }}">Destination Folders</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('to_do') }}">To Do List</a></li>
+          <li><a href="{{ url_for('account') }}"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+          <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  {# If a title is passed in, display it #}
+  {% if title %}
+    <h1>{{ title }}</h1>
+  {% endif %}
+
+  {# Where html pages that extend this one will have their content #}
+  {% block content %}{% endblock %}
+
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  {# javascript for when a button is pressed that displays a confirmation screen #}
+  <script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">{{ lodging.lodging_name }}</h4>
+      <h3>Location: {{ lodging.location }}</h3>
+      <h3>Rating: {{ visit.rating }}</h3>
+      <h3>Cost: ${{ visit.cost }}</h3>
+      <p>{{ visit.comment }}</p>
+    </div>
+  </div>
+  <hr>
+  <a href="{{ request.referrer or url_for('home') }}" class="btn btn-primary" role="button">Back</a>
+{% endblock content %}

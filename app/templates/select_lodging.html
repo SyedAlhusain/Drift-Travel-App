@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <div class="container">
+    <h2>Available Lodgings</h2>
+    <p>Choose a lodging to create a visit to it for your post:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lodging Name</th>
+                <th>Location</th>
+                <th>Choose This Lodging</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lodging in lodgings.items %}
+            <tr>
+                <td>{{ lodging.lodging_name }}</td>
+                <td>{{ lodging.location }}</td>
+                <td><a href="{{ url_for('add_lodging', lodging_id=lodging.lodging_id, post_id=post_id) }}" class="btn btn-primary" role="button">Select</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+    {% for page_num in lodgings.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if lodgings.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('lodgings', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('lodgings', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

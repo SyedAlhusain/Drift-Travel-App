@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{# A form for having a user create a tag object #}
+  <form id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Enter the name and description of the new Tag that you want to create:</legend>
+      <label for="tag_name">Tag Name: (limit of 16 characters)</label>
+      <input type="text" id="tag_name" name="tag_name" required minlength="1" maxlength="16"><br><br>
+      <label for="description">Description: (limit of 16 characters)</label>
+      <input type="text" id="description" name="description" required minlength="1" maxlength="16"><br><br>
+      <input type="submit">
+    </fieldset>
+
+  </form>
+
+
+{% endblock content %}

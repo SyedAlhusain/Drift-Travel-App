@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <form id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Enter Your To Do Details Below:</legend>
+      <label for="to_do_name">Task Name: (limit of 20 characters)</label>
+      <input type="text" id="to_do_name" name="to_do_name" required minlength="1" maxlength="20"><br><br>
+      <label for="description">Description(optional): (limit of 100 characters)</label>
+      <input type="text" id="description" name="description" maxlength="100"><br><br>
+      <input type="submit">
+    </fieldset>
+
+  </form>
+
+
+{% endblock content %}

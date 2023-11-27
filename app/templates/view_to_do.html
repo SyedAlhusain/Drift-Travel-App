@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <a href="{{ url_for('create_to_do') }}" class="btn btn-primary" role="button">Add a New To Do Item</a>
+
+  <div class="container">
+    <h2>Your To Do List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Update</th>
+              <th>Complete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for to_do in to_dos.items %}
+          <tr>
+            <td>{{ to_do.to_do_name }}</td>
+            <td>{{ to_do.description }}</td>
+            <td><a href="{{ url_for('modify_to_do', list_id=to_do.list_id) }}" class="btn btn-primary" role="button">Update</a></td>
+            <td><a href="{{ url_for('delete_to_do', list_id=to_do.list_id, user_id=to_do.fk_user_id) }}" class="btn btn-primary" role="button">Finish</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+  {% for page_num in to_dos.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if to_dos.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('to_do', page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('to_do', page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <p>Please enter your username and password to login:</p>
+
+    {# creates a form for login information #}
+    <form id="myForm" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend>Enter:</legend>
+            <label for="user_name">Username:</label>
+            <input type="text" id="user_name" name="user_name" required minlength="1"><br><br>
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required minlength="1"><br><br>
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember Me</label>
+            <input type="submit">
+        </fieldset>
+    </form>
+
+{% endblock content %}

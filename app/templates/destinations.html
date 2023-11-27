@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>{{ name.folder_name }}</h1>
+
+<table>
+    <tr>
+        <th>View Post</th>
+    </tr>
+    {# Display each student object along with their values and link to them in the table #}
+    {% for destination in destinations %}
+    <tr>
+        <td>
+            <a class="button" href="{{ url_for('view_destination', destination_id=destination.destination_id) }}">View</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{# creates a form for creating a destination_folder object that users input the name of #}
+  <form id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Enter the information below to create a lodging:</legend>
+      <label for="lodging_name">Post Title: (limit of 20 characters)</label>
+      <input type="text" id="lodging_name" name="lodging_name" required minlength="1" maxlength="30"><br><br>
+      <label for="location">Location: (limit of 40 characters)</label>
+      <input type="text" id="location" name="location" required minlength="1" maxlength="40"><br><br>
+
+      <input type="submit">
+    </fieldset>
+
+  </form>
+
+
+{% endblock content %}

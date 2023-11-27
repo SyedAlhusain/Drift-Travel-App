@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <form id="myForm" method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Enter Your comment below:</legend>
+      <label for="comment_content">Comment Content: (limit of 100 characters)</label>
+      <input type="text" id="comment_content" name="comment_content" required minlength="1" maxlength="100"><br><br>
+      <input type="submit">
+    </fieldset>
+
+  </form>
+
+
+{% endblock content %}

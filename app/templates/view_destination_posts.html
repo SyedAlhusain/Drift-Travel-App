@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  {% if name %}
+    <h1>Destination Folder: {{ name.folder_name }}</h1>
+  {% endif %}
+  {% if check == 1 %}
+    <a href="{{ url_for('create_post') }}" class="btn btn-success" role="button">Create Post</a>
+  {% endif %}
+
+  {% for post in posts.items %}
+  <div class="media">
+    <div class="media-left">
+      <img src="{{ url_for('static', filename='post_pics/' + post.image) }}" class="media-object" style="width:500px">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ post.post_title }}</h4>
+      <h3>{{ post.location }}</h3>
+      <p>{{post.post_content }}</p>
+    </div>
+  </div>
+  <hr>
+  <a href="{{ url_for('view_comments', post_id=post.post_id) }}" class="btn btn-primary" role="button">View Comments</a>
+  <a href="{{ url_for('create_comment', post_id=post.post_id) }}" class="btn btn-primary" role="button">Create Comment</a>
+  {% if visits.filter_by(fk_post_id=post.post_id).first() %}
+    <a href="{{ url_for('view_visit', post_id=post.post_id) }}" class="btn btn-primary" role="button">View Lodging Stay</a>
+  {% endif %}
+  <a href="{{ url_for('select_save_folder', post_id=post.post_id) }}" class="btn btn-primary" role="button">Save</a>
+  <a href="{{ url_for('like_post', post_id=post.post_id) }}" class="btn btn-primary" role="button">Like</a>
+  <hr>
+  {% endfor %}
+
+  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if posts.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('destinations', folder_id=folder_id, page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('destinations', folder_id=folder_id, page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+
+{% endblock content %}
