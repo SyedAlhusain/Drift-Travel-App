@@ -1,5 +1,29 @@
-The Requirements.txt contains the imports, you can download them all by
-the command "pip install -r requirements.txt"
-Run the program from the command "python run.py"
-You can run it in a python virtual enviornment or just use pycharm or visual studio 
-(I like Pycharm community edition)
+# Installing Libraries:
+
+To install the required libraries enter the commands:
+
+
+```bash
+py -3 -m venv venv
+```
+
+```bash
+venv\Scripts\activate
+```
+
+```bash
+pip install -r requirements.txt
+```
+
+# Runing the program from the command
+
+```bash
+  python run.py
+```
+
+or 
+
+```bash
+flask run
+```
+
