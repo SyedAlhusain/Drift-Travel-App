@@ -1,7 +1,10 @@
 # Installing Libraries:
 
-To install the required libraries enter the commands:
+## To install the required libraries enter the commands:
 
+```bash
+cd Drift-Travel-App
+```
 
 ```bash
 py -3 -m venv venv
@@ -15,7 +18,9 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-# Runing the program from the command
+# Runing the program
+
+## Enter the command:
 
 ```bash
   python run.py
