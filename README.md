@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ## Enter the command:
 
 ```bash
-  python run.py
+python run.py
 ```
 
 or 
