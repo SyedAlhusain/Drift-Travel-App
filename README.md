@@ -31,3 +31,7 @@ or
 ```bash
 flask run
 ```
+
+# Starting Program
+
+To be able to make posts and comments, you need to first click on the sign-in page to enter your info and then click the login page to log in with the info you provided to be able to make posts, comments etc.
