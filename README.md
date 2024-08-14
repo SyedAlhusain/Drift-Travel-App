@@ -41,4 +41,4 @@ To be able to make posts and comments, you need to first click on the sign-in pa
 
 # Online(In Progress):
 
-- [Drift Travel App](http://syedalamhusain.pythonanywhere.com/)
+- [Drift Travel App](https://syedhusain.pythonanywhere.com/)
